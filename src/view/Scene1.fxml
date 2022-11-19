@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+<AnchorPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Scene1Controller">
    <children>
       <Label layoutX="100.0" layoutY="95.0" text="Login to get started" textAlignment="CENTER" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <font>
@@ -23,7 +23,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="17.0" layoutY="220.0" prefHeight="65.0" prefWidth="300.0" promptText="Enter username" style="-fx-border-radius: 10; -fx-border-width: 10; -fx-border-color: #999999; -fx-background-radius: 15;" AnchorPane.leftAnchor="17.0">
+      <TextField fx:id="username" layoutX="17.0" layoutY="220.0" onAction="#btnLoginClicked" prefHeight="65.0" prefWidth="300.0" promptText="Enter username" style="-fx-border-radius: 10; -fx-border-width: 10; -fx-border-color: #999999; -fx-background-radius: 15;" AnchorPane.leftAnchor="17.0">
          <font>
             <Font size="20.0" />
          </font>
