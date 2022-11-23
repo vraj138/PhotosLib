@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.event.ActionEvent;
@@ -20,23 +21,20 @@ import org.json.JSONArray;
 import application.User;
 
 public class SceneA1Controller {
-    @FXML ListView<User> listView;
+    @FXML ListView<String> listView;
 
-    private ObservableList<User> obListUsers;
+    // ArrayList<User> users = new ArrayList<User>();
+    private ObservableList<String> usernamesList = FXCollections.observableArrayList();
 
     public void start(Stage mainStage) throws IOException{
         String content = readFile("userdata/usrerLists.json");
 
         JSONArray userArray = new JSONArray(content);
-        ArrayList<User> users = new ArrayList<User>();
-
         for(int i = 0; i < userArray.length(); i++) {
-            User fromstorage = new User(userArray.getJSONObject(i).getString("username"));
-            users.add(fromstorage);
+            usernamesList.add(userArray.getJSONObject(i).toString());
         }
 
-        obListUsers = FXCollections.observableArrayList(users);
-		listView.setItems(obListUsers);
+		listView.setItems(usernamesList);
     }
 
     private String readFile(String path) throws IOException {
@@ -62,16 +60,13 @@ public class SceneA1Controller {
         Optional<String> result = userDialog.showAndWait();
 
         TextField input = userDialog.getEditor();
+        // && input.getText() != null && input.getText().toString().length() != 0
 
-        if(result.isPresent() && input.getText() != null && input.getText().toString().length() != 0){
-            User newUser = new User(input.getText().trim());
-            System.out.println("Added " + newUser);
-            obListUsers.add(newUser);
+        if(result.isPresent()){
             
-            listView.getSelectionModel().clearSelection();
-            listView.getSelectionModel().select(obListUsers.indexOf(newUser));
-
-            saveUsers(obListUsers);
+            usernamesList.add(input.getText());
+            listView.setItems(usernamesList);
+            
             return;
         }else{
             userDialog.close();
@@ -83,10 +78,14 @@ public class SceneA1Controller {
 
     }
 
-    public void saveUsers(ObservableList<User> userList) throws IOException {
-		JSONArray userLists = new JSONArray(obListUsers);
+    public void saveUsers(ObservableList<String> userList) throws IOException {
+		JSONArray userLists = new JSONArray(usernamesList);
 		try (FileWriter file = new FileWriter("userdata/userLists.json")) {
 			file.write(userLists.toString());
         }
+    }
+
+    public void updateUsers(){
+        listView.refresh();
     }
 }
