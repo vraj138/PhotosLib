@@ -9,8 +9,16 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "application.App",
+            "projectName": "Photos06_cf525c52",
+            "vmArgs": "--module-path \"C:/Deep/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "application.App",
             "projectName": "photos06_3234de7",
-            "vmArgs": "--module-path /Users/vraj/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Deep/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
