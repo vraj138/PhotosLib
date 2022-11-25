@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SceneB1Controller">
    <children>
-      <Label layoutX="10.0" layoutY="15.0" prefHeight="40.0" prefWidth="134.0" text="My Albums" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="191.0">
+      <Label layoutX="104.0" layoutY="11.0" prefHeight="40.0" prefWidth="119.0" text="My Albums" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="112.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="searchphoto" layoutX="20.0" layoutY="53.0" prefHeight="40.0" prefWidth="294.0" promptText="Search Photo" style="-fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: #999999; -fx-background-radius: 15;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="21.0">
+      <TextField fx:id="searchphoto" layoutX="20.0" layoutY="53.0" onAction="#onSearchPhotos" prefHeight="40.0" prefWidth="294.0" promptText="Search Photo" style="-fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: #999999; -fx-background-radius: 15;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="21.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,6 +34,11 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <ListView layoutX="20.0" layoutY="109.0" prefHeight="414.0" prefWidth="294.0" />
+      <ListView fx:id="albumlistview" layoutX="20.0" layoutY="109.0" prefHeight="414.0" prefWidth="294.0" />
+      <Button layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBackBtnClicked" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Back" textFill="WHITE">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

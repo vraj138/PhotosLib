@@ -4,15 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SceneB2Controller {
+public class SceneB4Controller {
 
     @FXML
     private TextField searchphoto;
-
-    @FXML
-    void onAddPhotos(ActionEvent event) {
-
-    }
 
     @FXML
     void onBackBtnClicked(ActionEvent event) {
@@ -20,12 +15,7 @@ public class SceneB2Controller {
     }
 
     @FXML
-    void onEditCaption(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onRemovePhotos(ActionEvent event) {
+    void onCreateAlbum(ActionEvent event) {
 
     }
 
