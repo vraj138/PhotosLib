@@ -18,8 +18,8 @@ public class User implements Serializable {
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
-    public User(String usernmae) {
-        this.username = username;
+    public User(String name) {
+        this.username = name;
         this.userAlbums = new ArrayList<Album>();
     }
 
