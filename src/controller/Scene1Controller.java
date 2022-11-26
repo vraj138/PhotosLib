@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.*;
+import application.App;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,11 +16,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.Album;
 import model.User;
+import model.GlobalUser;
 
 public class Scene1Controller {
 
     @FXML
     private TextField username;
+
+    public static GlobalUser gu = App.gu;
 
     @FXML
     void btnLoginClicked(ActionEvent event) throws IOException {
@@ -34,16 +38,16 @@ public class Scene1Controller {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } else if (checkUser(username)) {
-            User currentUser = getCurrentUser();
-            ArrayList<Album> useralbums = currentUser.getAllAlbums();
+        } else if (gu.checkUser(user)) {
+            User currentUser = gu.getCurrentUser();
+            // ArrayList<Album> userAlbums = currentUser.getAllAlbums();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
             Parent sceneManager = (Parent) fxmlLoader.load();
             Scene userScene = new Scene(sceneManager);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(userScene);
             appStage.show();
-        } else if (username.isEmpty() || username == null) {
+        } else if (user.isEmpty() || user == null) {
             // System.out.print("Empty String");
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Dialog");

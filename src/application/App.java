@@ -6,8 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.GlobalUser;
 
 public class App extends Application {
+
+    public static GlobalUser gu = new GlobalUser();
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -20,7 +24,12 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        try {
+            gu = GlobalUser.loadGlobalUser();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         launch(args);
     }
 }
