@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
- 
+
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -17,7 +17,7 @@ public class App extends Application {
         primaryStage.setTitle("Welcome!");
         primaryStage.setScene(scene);
         primaryStage.show();
-    } 
+    }
 
     public static void main(String[] args) {
         launch(args);

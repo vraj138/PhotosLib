@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Album {
-    public static final String storeDir = ".dat";
+    public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
     public String albumName;
@@ -67,7 +67,7 @@ public class Album {
         return getAlbumName();
     }
 
-    // save current state of the app to the .dat file
+    // save current state of the app to the dat file
     public static void saveAlbum(Album a) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
         oos.writeObject(a);

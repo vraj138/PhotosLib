@@ -18,7 +18,7 @@ public class Photo implements Serializable {
     public ArrayList<Tag> tags;
 
     public static final String storeDir = "dat";
-    public static final String storeFile = "photos.dat";
+    public static final String storeFile = "users.dat";
 
     public Photo(File photo, String photoName) {
         this.name = photoName;
