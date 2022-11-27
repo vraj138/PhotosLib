@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import application.User;
+
 
 public class SceneA1Controller {
     @FXML

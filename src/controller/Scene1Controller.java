@@ -10,10 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import model.Album;
 import model.User;
 import model.GlobalUser;
@@ -38,6 +40,20 @@ public class Scene1Controller {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
+            // FXMLLoader editLoader = new FXMLLoader();
+			// editLoader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
+			// AnchorPane root = (AnchorPane) editLoader.load();
+			
+			// //Creates Stage for PhotoPage
+			// Stage editStage = new Stage();
+			// editStage.setTitle("Add new Photo");
+			// editStage.initModality(Modality.WINDOW_MODAL);
+			// // editStage.initOwner(currStage);
+			// Scene scene = new Scene(root);	
+			// editStage.setScene(scene);
+            // editStage.setResizable(false);
+            // editStage.show();
         } else if (gu.checkUser(user)) {
             User currentUser = gu.getCurrentUser();
             // ArrayList<Album> userAlbums = currentUser.getAllAlbums();
