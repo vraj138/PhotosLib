@@ -44,6 +44,16 @@ public class User implements Serializable {
         userAlbums.remove(index);
     }
 
+    // check if an album is created by this user or not
+    public boolean exists(Album albumname) {
+        for (Album album : userAlbums) {
+            if (album.getAlbumName().equals(albumname.albumName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getUsername() {
         return username;
     }

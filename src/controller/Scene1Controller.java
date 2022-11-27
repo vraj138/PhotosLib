@@ -40,7 +40,9 @@ public class Scene1Controller {
             stage.show();
         } else if (gu.checkUser(user)) {
             User currentUser = gu.getCurrentUser();
-            // ArrayList<Album> userAlbums = currentUser.getAllAlbums();
+
+            UserController.username = user;
+            ArrayList<Album> userAlbums = currentUser.getAllAlbums();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
             Parent sceneManager = (Parent) fxmlLoader.load();
             Scene userScene = new Scene(sceneManager);
@@ -48,7 +50,7 @@ public class Scene1Controller {
             appStage.setScene(userScene);
             appStage.show();
         } else if (user.isEmpty() || user == null) {
-            // System.out.print("Empty String");
+
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Please enter a username");

@@ -16,8 +16,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import application.User;
-
 public class SceneA1Controller {
     @FXML
     ListView<String> listView;
@@ -74,7 +72,7 @@ public class SceneA1Controller {
 
     @FXML
     void onDeleteUser(ActionEvent event) {
-        
+
     }
 
     // public void saveUsers(ObservableList<String> userList) throws IOException {

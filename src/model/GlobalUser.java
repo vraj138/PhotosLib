@@ -34,8 +34,8 @@ public class GlobalUser implements Serializable {
         this.isUserLoggedIn = false;
     }
 
-    public void addUser(User u) {
-        allUsers.add(u);
+    public void addUser(String username) {
+        allUsers.add(new User(username));
     }
 
     public void deleteUser(int index) {
@@ -72,6 +72,33 @@ public class GlobalUser implements Serializable {
 
     public void setCurrentUser(User u) {
         this.currentUser = u;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return allUsers;
+    }
+
+    public void setAllUsers(ArrayList<User> users) {
+        this.allUsers = users;
+    }
+
+    public User getUser(String username) {
+        for (User u : allUsers) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean userExists(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // save current state of the app to the dat file
