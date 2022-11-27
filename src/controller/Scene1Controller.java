@@ -10,12 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import model.Album;
 import model.User;
 import model.GlobalUser;
@@ -36,25 +36,28 @@ public class Scene1Controller {
             mainWindow.setTitle("Welcome " + user);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
-            // FXMLLoader editLoader = new FXMLLoader();
-			// editLoader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
-			// AnchorPane root = (AnchorPane) editLoader.load();
-			
-			// //Creates Stage for PhotoPage
-			// Stage editStage = new Stage();
-			// editStage.setTitle("Add new Photo");
-			// editStage.initModality(Modality.WINDOW_MODAL);
-			// // editStage.initOwner(currStage);
-			// Scene scene = new Scene(root);	
-			// editStage.setScene(scene);
-            // editStage.setResizable(false);
-            // editStage.show();
-        } else if (gu.checkUser(user)) {
+            // FXMLLoader loader = new FXMLLoader();
+            // loader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
+            // AnchorPane root = (AnchorPane) loader.load();
+
+            // // Creates Stage for PhotoPage
+            // // Stage stage = new Stage();
+            // stage.initModality(Modality.WINDOW_MODAL);
+            // // stage.initOwner(currStage);
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.setResizable(false);
+            // stage.show();
+
+            SceneA1Controller admin = loader.getController();
+            admin.start(stage);
+
+        } else if (gu.userExists(user)) {
             User currentUser = gu.getCurrentUser();
 
             UserController.username = user;

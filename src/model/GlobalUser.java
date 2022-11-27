@@ -11,8 +11,8 @@ import java.util.*;
 
 public class GlobalUser implements Serializable {
 
-    public static final String storeDir = "dat";
-    public static final String storeFile = "users.dat";
+    public static final String storeDir = "txt";
+    public static final String storeFile = "users.txt";
 
     // keep a list of all users
     public ArrayList<User> allUsers;
@@ -26,7 +26,7 @@ public class GlobalUser implements Serializable {
         allUsers = new ArrayList<User>();
 
         // add admin as first user to the arraylist
-        allUsers.add(new User("admin"));
+        // allUsers.add(new User("admin"));
         allUsers.add(new User("stock"));
 
         this.currentUser = null;
@@ -78,6 +78,15 @@ public class GlobalUser implements Serializable {
         return allUsers;
     }
 
+    public ArrayList<String> getAllUsernames() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (User u : allUsers) {
+            names.add(u.getUsername());
+        }
+
+        return names;
+    }
+
     public void setAllUsers(ArrayList<User> users) {
         this.allUsers = users;
     }
@@ -101,16 +110,16 @@ public class GlobalUser implements Serializable {
         return false;
     }
 
-    // save current state of the app to the dat file
+    // save current state of the app to the txt file
     public static void saveGlobalUser(GlobalUser gu) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeFile));
         oos.writeObject(gu);
         oos.close();
     }
 
     // deserializing objects from storage
     public static GlobalUser loadGlobalUser() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeFile));
         GlobalUser globalUserList = (GlobalUser) ois.readObject();
         ois.close();
         return globalUserList;

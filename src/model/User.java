@@ -15,12 +15,18 @@ public class User implements Serializable {
     public ArrayList<Album> userAlbums;
     public Album currentAlbum;
 
-    public static final String storeDir = "dat";
-    public static final String storeFile = "users.dat";
+    public static final String storeDir = "txt";
+    public static final String storeFile = "users.txt";
 
     public User(String name) {
         this.username = name;
         this.userAlbums = new ArrayList<Album>();
+    }
+
+    @Override
+    public String toString() {
+        // System.out.println(getUsername());
+        return getUsername();
     }
 
     // display the list of all albums created by this user
@@ -92,16 +98,16 @@ public class User implements Serializable {
         return userAlbums.get(index);
     }
 
-    // save current state of the app to the dat file
+    // save current state of the app to the txt file
     public static void saveUser(User u) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeFile));
         oos.writeObject(u);
         oos.close();
     }
 
     // deserializing objects from storage
     public static User loadUser() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeFile));
         User userList = (User) ois.readObject();
         ois.close();
         return userList;

@@ -11,41 +11,27 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 import java.util.*;
+import model.GlobalUser;
+import model.User;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class SceneA1Controller {
     @FXML
     ListView<String> listView;
 
+    GlobalUser gu = new GlobalUser();
+
+    ArrayList<String> allUsernames = gu.getAllUsernames();
+
     // ArrayList<User> users = new ArrayList<User>();
-    private ObservableList<String> usernamesList = FXCollections.observableArrayList();
+    public ObservableList<String> usernamesList = FXCollections.observableArrayList(allUsernames);
 
-    public void start(Stage mainStage) throws IOException {
-        String content = readFile("userdata/usrerLists.json");
-
-        // JSONArray userArray = new JSONArray(content);
-        // for (int i = 0; i < userArray.length(); i++) {
-        // usernamesList.add(userArray.getJSONObject(i).toString());
-        // }
-
+    public void start(Stage stage) {
+        System.out.println(allUsernames);
+        System.out.println("hi there");
         listView.setItems(usernamesList);
-    }
-
-    private String readFile(String path) throws IOException {
-        File file = new File(path);
-
-        // Build a string from file's contents
-        StringBuilder content = new StringBuilder((int) file.length());
-
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                content.append(scanner.nextLine() + System.lineSeparator());
-            }
-            return content.toString();
-        }
+        listView.refresh();
     }
 
     @FXML
@@ -62,7 +48,11 @@ public class SceneA1Controller {
         if (result.isPresent()) {
 
             usernamesList.add(input.getText());
+            gu.addUser(input.getText());
+
+            System.out.println(gu.getAllUsers());
             listView.setItems(usernamesList);
+            listView.refresh();
 
             return;
         } else {

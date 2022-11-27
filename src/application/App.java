@@ -12,7 +12,6 @@ public class App extends Application {
 
     public static GlobalUser gu = new GlobalUser();
 
-    @Override
     public void start(Stage primaryStage) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("../view/Scene1.fxml"));

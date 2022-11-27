@@ -11,6 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 public class SceneB1Controller {
 
@@ -32,12 +36,22 @@ public class SceneB1Controller {
 
     @FXML
     void onLogOutBtnClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Scene1.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Logout");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to log out of your account?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Scene1.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene adminScene = new Scene(root);
+            Stage app = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app.setScene(adminScene);
+            app.show();
+        } else {
+            return;
+        }
     }
 
     @FXML
