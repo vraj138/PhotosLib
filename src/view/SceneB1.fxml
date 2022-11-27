@@ -31,7 +31,7 @@
          </font>
       </Button>
       <ListView fx:id="albumlistview" layoutX="20.0" layoutY="147.0" prefHeight="376.0" prefWidth="294.0" />
-      <Button layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBackBtnClicked" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
+      <Button layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#onLogOutBtnClicked" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
          <font>
             <Font size="11.0" />
          </font>
