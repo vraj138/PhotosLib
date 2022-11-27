@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -25,30 +23,16 @@ public class SceneA1Controller {
     // ArrayList<User> users = new ArrayList<User>();
     private ObservableList<String> usernamesList = FXCollections.observableArrayList();
 
-    public void start(Stage mainStage) throws IOException {
-        String content = readFile("userdata/usrerLists.json");
+    public Stage currStage;
 
-        // JSONArray userArray = new JSONArray(content);
-        // for (int i = 0; i < userArray.length(); i++) {
-        // usernamesList.add(userArray.getJSONObject(i).toString());
-        // }
-
+    public void start(Stage stage) throws IOException {
+        // System.out.println("Hi: ");
+        currStage = stage;
+        System.out.println("Hi: ");
         listView.setItems(usernamesList);
     }
 
-    private String readFile(String path) throws IOException {
-        File file = new File(path);
-
-        // Build a string from file's contents
-        StringBuilder content = new StringBuilder((int) file.length());
-
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                content.append(scanner.nextLine() + System.lineSeparator());
-            }
-            return content.toString();
-        }
-    }
+    
 
     @FXML
     void onAddUser(ActionEvent event) throws IOException {
@@ -60,7 +44,7 @@ public class SceneA1Controller {
 
         TextField input = userDialog.getEditor();
         // && input.getText() != null && input.getText().toString().length() != 0
-
+        // System.out.println("Hi: ");
         if (result.isPresent()) {
 
             usernamesList.add(input.getText());

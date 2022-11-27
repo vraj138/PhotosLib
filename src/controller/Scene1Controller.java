@@ -34,26 +34,29 @@ public class Scene1Controller {
 
         if (user.equals("admin")) {
             mainWindow.setTitle("Welcome " + user);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
+            // Parent root = loader.load();
+            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.show();
+
+            // SceneA1Controller adminController = loader.getController();
+            // adminController.start(stage);
+
+            FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
+			AnchorPane root = (AnchorPane) loader.load();
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.WINDOW_MODAL);
+			Scene scene = new Scene(root);	
+			stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
 
-            // FXMLLoader editLoader = new FXMLLoader();
-			// editLoader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
-			// AnchorPane root = (AnchorPane) editLoader.load();
-			
-			// //Creates Stage for PhotoPage
-			// Stage editStage = new Stage();
-			// editStage.setTitle("Add new Photo");
-			// editStage.initModality(Modality.WINDOW_MODAL);
-			// // editStage.initOwner(currStage);
-			// Scene scene = new Scene(root);	
-			// editStage.setScene(scene);
-            // editStage.setResizable(false);
-            // editStage.show();
+            SceneA1Controller adminController = loader.getController();
+            adminController.start(stage);
         } else if (gu.checkUser(user)) {
             User currentUser = gu.getCurrentUser();
             // ArrayList<Album> userAlbums = currentUser.getAllAlbums();
