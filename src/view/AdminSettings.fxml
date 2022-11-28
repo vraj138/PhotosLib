@@ -23,5 +23,11 @@
             <Font size="11.0" />
          </font>
       </Button>
+      <Button fx:id="adminLogOut" layoutX="261.0" layoutY="23.0" mnemonicParsing="false" onAction="#onLogOutBtnClicked" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Log Out" textFill="WHITE">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listview" layoutX="16.0" layoutY="60.0" prefHeight="464.0" prefWidth="301.0" />
    </children>
 </AnchorPane>
