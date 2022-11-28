@@ -53,7 +53,6 @@ public class AdminSettingsController implements LogoutController {
         for (int i = 0; i < gu.getAllUsers().size(); i++) {
             allUsernames.add(gu.getAllUsers().get(i).getUsername());
         }
-        listView.refresh();
         usernamesList = FXCollections.observableArrayList(allUsernames);
         listView.setItems(usernamesList);
         listView.refresh();
