@@ -23,9 +23,9 @@ public class SceneB2Controller {
 
     @FXML
     void onBackBtnClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/WelcomeLogin.fxml"));
         Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -42,10 +42,10 @@ public class Photo implements Serializable {
     }
 
     // deserializing objects from storage
-    public static Photo loadPhotos() throws IOException, ClassNotFoundException {
+    public static User loadPhotos() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-        Photo photoList = (Photo) ois.readObject();
+        User userList = (User) ois.readObject();
         ois.close();
-        return photoList;
+        return userList;
     }
 }

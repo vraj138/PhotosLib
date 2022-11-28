@@ -13,8 +13,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class LogoutController {
-    public void logUserOut(ActionEvent event) throws IOException {
+public interface LogoutController {
+    default void logUserOut(ActionEvent event) throws IOException {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm Logout");
         alert.setHeaderText(null);
@@ -22,7 +22,7 @@ public class LogoutController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Scene1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WelcomeLogin.fxml"));
             Parent root = (Parent) loader.load();
             Scene adminScene = new Scene(root);
             Stage app = (Stage) ((Node) event.getSource()).getScene().getWindow();

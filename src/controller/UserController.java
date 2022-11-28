@@ -74,22 +74,23 @@ public class UserController {
     public void start(Stage stage) {
         update();
 
-        stage.setTitle(adminuser.getCurrentUser().getUsername() + " Collection of Photos");
+        stage.setTitle(" Collection of Photos");
         if (!albumlist.isEmpty()) {
             listview.getSelectionModel().select(0);
         }
 
         // Listen for selection changes
-        if (albumlist.size() > 0) {
-            tfName.setText(albumlist.get(0).albumName);
-            tNumber.setText("Number of Photos: " + albumlist.get(0).numPhotos);
-            // tDateSpan.setText("Date Span (First, Last): \n\t" +
-            // albumlist.get(0).getFirstDate() + "\n\t"
-            // + albumlist.get(0).getLastDate());
-        }
-        // listview.getSelectionModel().selectedItemProperty()
-        // .addListener((v, oldValue, newValue) -> updateContent(newValue));
+        // if (albumlist.size() > 0) {
+        // tfName.setText(albumlist.get(0).albumName);
+        // tNumber.setText("Number of Photos: " + albumlist.get(0).numPhotos);
+        // tDateSpan.setText("Date Span (First, Last): \n\t" +
+        // albumlist.get(0).getFirstDate() + "\n\t"
+        // + albumlist.get(0).getLastDate());
     }
+
+    // listview.getSelectionModel().selectedItemProperty()
+    // .addListener((v, oldValue, newValue) -> updateContent(newValue));
+    // }
 
     // sorts alphabetically, A-first to Z-last
     // public void sortByAZ() throws IOException {
@@ -379,7 +380,7 @@ public class UserController {
      * Updates the albums contents
      */
     public void update() {
-        tUser.setText(username + "'s Album List:");
+        // tUser.setText(username + "'s Album List:");
 
         // we pass in the current logged in user's username and get that user
         user = adminuser.getUser(username);
@@ -395,5 +396,30 @@ public class UserController {
         observableList = FXCollections.observableArrayList(albumlist);
         listview.setItems(observableList);
         listview.refresh();
+    }
+
+    @FXML
+    void onCreateAlbum(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onDeleteAlbum(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onLogOutBtnClicked(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
+    void onRenameAlbum(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onSearchPhotos(ActionEvent event) {
+
     }
 }

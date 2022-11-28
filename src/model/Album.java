@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Album {
     public static final String storeDir = "dat";
-    public static final String storeFile = "users.txt";
+    public static final String storeFile = "users.dat";
 
     public String albumName;
     public ArrayList<Photo> photoList;
@@ -69,17 +69,17 @@ public class Album {
 
     // save current state of the app to the dat file
     public static void saveAlbum(Album a) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeFile));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
         oos.writeObject(a);
         oos.close();
     }
 
     // deserializing objects from storage
-    public static Album loadAlbum() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeFile));
-        Album albumList = (Album) ois.readObject();
+    public static GlobalUser loadAlbum() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
+        GlobalUser userList = (GlobalUser) ois.readObject();
         ois.close();
-        return albumList;
+        return userList;
     }
 
     // we want to sort album names alphabetically

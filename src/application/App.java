@@ -6,21 +6,42 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 import model.GlobalUser;
 
 public class App extends Application {
 
     public static GlobalUser gu = new GlobalUser();
+    public Stage appStage;
 
+    @Override
     public void start(Stage primaryStage) throws IOException {
+        try {
+            appStage = primaryStage;
 
-        Parent root = FXMLLoader.load(getClass().getResource("../view/Scene1.fxml"));
-        Scene scene = new Scene(root);
+            Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeLogin.fxml"));
+            Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Welcome!");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+            appStage.setTitle("Photo Gallery!");
+            appStage.setScene(scene);
+            appStage.setResizable(false);
+            appStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        appStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                try {
+                    GlobalUser.saveGlobalUser(gu);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.print("Closed");
+            }
+        });
+
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {

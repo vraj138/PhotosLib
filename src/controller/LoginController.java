@@ -19,8 +19,10 @@ import javafx.scene.control.Alert.AlertType;
 import model.Album;
 import model.User;
 import model.GlobalUser;
+import controller.AdminSettingsController;
+import controller.*;
 
-public class Scene1Controller {
+public class LoginController {
 
     @FXML
     private TextField username;
@@ -28,18 +30,19 @@ public class Scene1Controller {
     public static GlobalUser gu = App.gu;
 
     @FXML
-    void btnLoginClicked(ActionEvent event) throws IOException {
-        Stage mainWindow = (Stage) username.getScene().getWindow();
+    public void btnLoginClicked(ActionEvent event) throws IOException {
+        // Stage mainWindow = (Stage) username.getScene().getWindow();
         String user = username.getText().trim();
 
         if (user.equals("admin")) {
-            mainWindow.setTitle("Welcome " + user);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminSettings.fxml"));
+            Parent root = (Parent) loader.load();
+            AdminSettingsController asController = loader.getController();
+            Scene adminSettingsScene = new Scene(root);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            asController.start();
+            appStage.setScene(adminSettingsScene);
+            appStage.show();
 
             // FXMLLoader loader = new FXMLLoader();
             // loader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
@@ -54,26 +57,27 @@ public class Scene1Controller {
             // stage.setResizable(false);
             // stage.show();
 
-            SceneA1Controller admin = loader.getController();
-            admin.start(stage);
-
-        } else if (gu.userExists(user)) {
-            User currentUser = gu.getCurrentUser();
+        } else if (gu.checkUser(user)) {
+            // User currentUser = gu.getCurrentUser();
 
             UserController.username = user;
-            ArrayList<Album> userAlbums = currentUser.getAllAlbums();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
-            Parent sceneManager = (Parent) fxmlLoader.load();
-            Scene userScene = new Scene(sceneManager);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
+            Parent root = (Parent) loader.load();
+
+            UserController userController = loader.getController();
+
+            Scene userAlbumScene = new Scene(root);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            appStage.setScene(userScene);
+            userController.start(appStage);
+
+            appStage.setScene(userAlbumScene);
             appStage.show();
         } else if (user.isEmpty() || user == null) {
 
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Please enter a username");
-            // alert.showAndWait();
+
             Optional<ButtonType> buttonClicked = alert.showAndWait();
             if (buttonClicked.get() == ButtonType.OK) {
                 alert.close();

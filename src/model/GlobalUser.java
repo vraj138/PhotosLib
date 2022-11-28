@@ -11,8 +11,8 @@ import java.util.*;
 
 public class GlobalUser implements Serializable {
 
-    public static final String storeDir = "txt";
-    public static final String storeFile = "users.txt";
+    public static final String storeDir = "dat";
+    public static final String storeFile = "users.dat";
 
     // keep a list of all users
     public ArrayList<User> allUsers;
@@ -112,14 +112,14 @@ public class GlobalUser implements Serializable {
 
     // save current state of the app to the txt file
     public static void saveGlobalUser(GlobalUser gu) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeFile));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
         oos.writeObject(gu);
         oos.close();
     }
 
     // deserializing objects from storage
     public static GlobalUser loadGlobalUser() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeFile));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
         GlobalUser globalUserList = (GlobalUser) ois.readObject();
         ois.close();
         return globalUserList;

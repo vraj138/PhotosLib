@@ -43,7 +43,7 @@ public class SceneB1Controller {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Scene1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WelcomeLogin.fxml"));
             Parent root = (Parent) loader.load();
             Scene adminScene = new Scene(root);
             Stage app = (Stage) ((Node) event.getSource()).getScene().getWindow();
