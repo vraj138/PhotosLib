@@ -20,7 +20,7 @@ public class User implements Serializable {
 
     public User(String name) {
         this.username = name;
-        this.userAlbums = new ArrayList<Album>();
+        // this.userAlbums = new ArrayList<Album>();
     }
 
     @Override

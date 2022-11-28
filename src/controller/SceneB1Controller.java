@@ -16,7 +16,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
-public class SceneB1Controller {
+import controller.LogoutController;
+
+public class SceneB1Controller implements LogoutController {
 
     @FXML
     private ListView<?> albumlistview;

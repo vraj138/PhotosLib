@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.Guard;
 import java.util.*;
 
 public class GlobalUser implements Serializable {
@@ -22,12 +23,13 @@ public class GlobalUser implements Serializable {
 
     public boolean isUserLoggedIn;
 
-    public GlobalUser() {
+    public GlobalUser(){
         allUsers = new ArrayList<User>();
 
         // add admin as first user to the arraylist
         // allUsers.add(new User("admin"));
         allUsers.add(new User("stock"));
+    
 
         this.currentUser = null;
 

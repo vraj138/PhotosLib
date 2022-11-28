@@ -33,6 +33,8 @@ public class LoginController {
     public void btnLoginClicked(ActionEvent event) throws IOException {
         // Stage mainWindow = (Stage) username.getScene().getWindow();
         String user = username.getText().trim();
+        System.out.println(gu.getAllUsers());
+        
 
         if (user.equals("admin")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminSettings.fxml"));
@@ -97,7 +99,6 @@ public class LoginController {
             }
 
         }
-
     }
 
 }
