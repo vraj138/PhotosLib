@@ -12,7 +12,6 @@ public class App extends Application {
 
     public static GlobalUser gu = new GlobalUser();
 
-    @Override
     public void start(Stage primaryStage) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("../view/Scene1.fxml"));
@@ -21,6 +20,8 @@ public class App extends Application {
         primaryStage.setTitle("Welcome!");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+        primaryStage.setX(100);
+        primaryStage.setY(100);
         primaryStage.show();
     }
 

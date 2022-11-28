@@ -10,12 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import model.Album;
 import model.User;
 import model.GlobalUser;
@@ -28,37 +28,42 @@ public class Scene1Controller {
     public static GlobalUser gu = App.gu;
 
     @FXML
-    void btnLoginClicked(ActionEvent event) throws IOException {
+    void btnLoginClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         Stage mainWindow = (Stage) username.getScene().getWindow();
         String user = username.getText().trim();
+        System.out.println(gu.getAllUsers());
+        
 
         if (user.equals("admin")) {
             mainWindow.setTitle("Welcome " + user);
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
-            // Parent root = loader.load();
-            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SceneA1.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            // GlobalUser.loadGlobalUser();
+
+            // FXMLLoader loader = new FXMLLoader();
+            // loader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
+            // AnchorPane root = (AnchorPane) loader.load();
+
+            // // Creates Stage for PhotoPage
+            // // Stage stage = new Stage();
+            // stage.initModality(Modality.WINDOW_MODAL);
+            // // stage.initOwner(currStage);
             // Scene scene = new Scene(root);
             // stage.setScene(scene);
+            // stage.setResizable(false);
             // stage.show();
 
-            // SceneA1Controller adminController = loader.getController();
-            // adminController.start(stage);
+            SceneA1Controller admin = loader.getController();
+            admin.start(stage);
 
-            FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../view/SceneA1.fxml"));
-			AnchorPane root = (AnchorPane) loader.load();
-			
-			Stage stage = new Stage();
-			stage.initModality(Modality.WINDOW_MODAL);
-			Scene scene = new Scene(root);	
-			stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-
-            SceneA1Controller adminController = loader.getController();
-            adminController.start(stage);
-        } else if (gu.checkUser(user)) {
+        } else if (gu.userExists(user)) {
             User currentUser = gu.getCurrentUser();
+
+            UserController.username = user;
             // ArrayList<Album> userAlbums = currentUser.getAllAlbums();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
             Parent sceneManager = (Parent) fxmlLoader.load();
@@ -67,7 +72,7 @@ public class Scene1Controller {
             appStage.setScene(userScene);
             appStage.show();
         } else if (user.isEmpty() || user == null) {
-            // System.out.print("Empty String");
+
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Please enter a username");
@@ -91,7 +96,6 @@ public class Scene1Controller {
             }
 
         }
-
     }
 
 }

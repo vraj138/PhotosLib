@@ -20,7 +20,13 @@ public class User implements Serializable {
 
     public User(String name) {
         this.username = name;
-        this.userAlbums = new ArrayList<Album>();
+        // this.userAlbums = new ArrayList<Album>();
+    }
+
+    @Override
+    public String toString() {
+        // System.out.println(getUsername());
+        return getUsername();
     }
 
     // display the list of all albums created by this user
@@ -42,6 +48,16 @@ public class User implements Serializable {
     // remove an album from user's album arraylist
     public void removeAlbum(int index) {
         userAlbums.remove(index);
+    }
+
+    // check if an album is created by this user or not
+    public boolean exists(Album albumname) {
+        for (Album album : userAlbums) {
+            if (album.getAlbumName().equals(albumname.albumName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getUsername() {
@@ -82,7 +98,7 @@ public class User implements Serializable {
         return userAlbums.get(index);
     }
 
-    // save current state of the app to the dat file
+    // save current state of the app to the txt file
     public static void saveUser(User u) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
         oos.writeObject(u);

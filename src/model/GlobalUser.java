@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.Guard;
 import java.util.*;
 
 public class GlobalUser implements Serializable {
@@ -22,20 +23,21 @@ public class GlobalUser implements Serializable {
 
     public boolean isUserLoggedIn;
 
-    public GlobalUser() {
+    public GlobalUser(){
         allUsers = new ArrayList<User>();
 
         // add admin as first user to the arraylist
-        allUsers.add(new User("admin"));
+        // allUsers.add(new User("admin"));
         allUsers.add(new User("stock"));
+    
 
         this.currentUser = null;
 
         this.isUserLoggedIn = false;
     }
 
-    public void addUser(User u) {
-        allUsers.add(u);
+    public void addUser(String username) {
+        allUsers.add(new User(username));
     }
 
     public void deleteUser(int index) {
@@ -74,7 +76,43 @@ public class GlobalUser implements Serializable {
         this.currentUser = u;
     }
 
-    // save current state of the app to the dat file
+    public ArrayList<User> getAllUsers() {
+        return allUsers;
+    }
+
+    public ArrayList<String> getAllUsernames() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (User u : allUsers) {
+            names.add(u.getUsername());
+        }
+
+        return names;
+    }
+
+    public void setAllUsers(ArrayList<User> users) {
+        this.allUsers = users;
+    }
+
+    public User getUser(String username) {
+        for (User u : allUsers) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean userExists(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // save current state of the app to the txt file
     public static void saveGlobalUser(GlobalUser gu) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
         oos.writeObject(gu);

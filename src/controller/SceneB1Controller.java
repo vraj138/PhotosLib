@@ -11,8 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
-public class SceneB1Controller {
+import controller.LogoutController;
+
+public class SceneB1Controller implements LogoutController{
 
     @FXML
     private ListView<?> albumlistview;
@@ -32,12 +38,7 @@ public class SceneB1Controller {
 
     @FXML
     void onLogOutBtnClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Scene1.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        logUserOut(event);   
     }
 
     @FXML
