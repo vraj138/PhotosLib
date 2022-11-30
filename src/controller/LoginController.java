@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.*;
-import application.App;
+import application.Photos;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,27 +13,22 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
 import javafx.scene.control.Alert.AlertType;
-import model.Album;
-import model.User;
 import model.GlobalUser;
-import controller.AdminSettingsController;
-import controller.*;
+import model.*;
 
 public class LoginController {
 
     @FXML
     private TextField username;
 
-    public static GlobalUser gu = App.gu;
+    public static GlobalUser gu = Photos.gu;
 
     @FXML
-    public void btnLoginClicked(ActionEvent event) throws IOException {
+    public void btnLoginClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         // Stage mainWindow = (Stage) username.getScene().getWindow();
         String user = username.getText().trim();
-        System.out.println(gu.getAllUsers());
+        // System.out.println(gu.getAllUsers());
         
 
         if (user.equals("admin")) {
@@ -61,7 +56,7 @@ public class LoginController {
 
         } else if (gu.checkUser(user)) {
             // User currentUser = gu.getCurrentUser();
-
+            System.out.println("Hi" + gu.getAllUsers());
             UserController.username = user;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
             Parent root = (Parent) loader.load();
@@ -74,6 +69,7 @@ public class LoginController {
 
             appStage.setScene(userAlbumScene);
             appStage.show();
+
         } else if (user.isEmpty() || user == null) {
 
             Alert alert = new Alert(AlertType.ERROR);
@@ -86,6 +82,7 @@ public class LoginController {
             } else {
                 alert.close();
             }
+
         } else {
             System.out.println("Incorrect Input");
             Alert alert = new Alert(AlertType.ERROR);

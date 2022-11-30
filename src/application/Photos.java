@@ -10,7 +10,7 @@ import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import model.GlobalUser;
 
-public class App extends Application {
+public class Photos extends Application {
 
     public static GlobalUser gu = new GlobalUser();
     public Stage appStage;

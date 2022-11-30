@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.security.Guard;
 import java.util.*;
 
 public class GlobalUser implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -29,10 +30,7 @@ public class GlobalUser implements Serializable {
         // add admin as first user to the arraylist
         // allUsers.add(new User("admin"));
         allUsers.add(new User("stock"));
-    
-
         this.currentUser = null;
-
         this.isUserLoggedIn = false;
     }
 
@@ -49,12 +47,11 @@ public class GlobalUser implements Serializable {
         allUsers.remove(u);
     }
 
-    public boolean checkUser(String username) {
+    public boolean checkUser(String username)  {
         int userIndex = -1;
         for (int i = 0; i < allUsers.size(); i++) {
             if (allUsers.get(i).getUsername().equals(username)) {
                 userIndex = i;
-                break;
             }
         }
 
@@ -65,6 +62,7 @@ public class GlobalUser implements Serializable {
 
         this.setCurrentUser(allUsers.get(userIndex));
         this.isUserLoggedIn = true;
+
         return true;
     }
 

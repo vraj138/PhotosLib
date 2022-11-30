@@ -6,28 +6,34 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
 
 import java.util.*;
+
+import application.Photos;
 import model.GlobalUser;
 import model.User;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class AdminSettingsController implements LogoutController {
     @FXML
     public ListView<String> listView;
 
     @FXML
-    public Button adminAdd, adminDelete;
+    public Button adminAdd, adminDelete, adminLogOut;
 
-    public static GlobalUser gu = new GlobalUser();
+    public static GlobalUser gu = Photos.gu;
 
     public static ArrayList<String> allUsernames = new ArrayList<String>();
 
@@ -57,11 +63,6 @@ public class AdminSettingsController implements LogoutController {
         usernamesList = FXCollections.observableArrayList(allUsernames);
         listView.setItems(usernamesList);
         listView.refresh();
-
-    }
-
-    public void logOut(ActionEvent event) throws IOException {
-        logUserOut(event);
     }
 
     @FXML
@@ -85,9 +86,13 @@ public class AdminSettingsController implements LogoutController {
                 alert.setContentText("Username already exists. Try entering a new username!");
                 alert.showAndWait();
                 return;
-            }
-            // can not add another admin
-            else if (user.equals("admin")) {
+            }else if(user.isEmpty() || user == null) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Admin Error");
+                alert.setContentText("Empty Field: Please enter a username.");
+                alert.showAndWait();
+                return;
+            }else if (user.equals("admin")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Admin Error");
                 alert.setContentText("Cannot add 'admin' to Users.");
@@ -97,6 +102,7 @@ public class AdminSettingsController implements LogoutController {
                 gu.addUser(user);
                 update();
                 userDialog.close();
+                System.out.println(gu.getAllUsers());
             }
             GlobalUser.saveGlobalUser(gu);
 
@@ -119,6 +125,7 @@ public class AdminSettingsController implements LogoutController {
 
             gu.deleteUser(index);
             update();
+            System.out.println("Delete " + gu.getAllUsers());
             GlobalUser.saveGlobalUser(gu);
 
             if (gu.getAllUsers().size() == 1) {
@@ -141,6 +148,11 @@ public class AdminSettingsController implements LogoutController {
 
     }
 
+    @FXML
+    void onLogOutBtnClicked(ActionEvent event) throws IOException {
+        logUserOut(event);
+    }
+
     // public void saveUsers(ObservableList<String> allUsernames) throws IOException
     // {
     // JSONArray allUsernamess = new JSONArray(usernamesList);
@@ -149,7 +161,4 @@ public class AdminSettingsController implements LogoutController {
     // }
     // }
 
-    public void updateUsers() {
-        listView.refresh();
-    }
 }

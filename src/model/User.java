@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
 
 public class User implements Serializable {
@@ -20,7 +19,7 @@ public class User implements Serializable {
 
     public User(String name) {
         this.username = name;
-        // this.userAlbums = new ArrayList<Album>();
+        userAlbums = new ArrayList<Album>();
     }
 
     @Override
@@ -38,6 +37,10 @@ public class User implements Serializable {
 
     public ArrayList<Album> getAllAlbums() {
         return userAlbums;
+    }
+
+    public void setAllAlbums(ArrayList<Album> albums) {
+        this.userAlbums = albums;
     }
 
     // add an album to user's album arraylist
