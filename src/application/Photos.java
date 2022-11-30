@@ -23,7 +23,7 @@ public class Photos extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("../view/WelcomeLogin.fxml"));
             Scene scene = new Scene(root);
 
-            appStage.setTitle("Photo Gallery!");
+            appStage.setTitle("Photo Gallery");
             appStage.setScene(scene);
             appStage.setResizable(false);
             appStage.show();
