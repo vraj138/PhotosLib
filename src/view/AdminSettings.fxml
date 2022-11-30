@@ -29,6 +29,6 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <ListView fx:id="listview" layoutX="16.0" layoutY="60.0" prefHeight="464.0" prefWidth="301.0" />
+      <ListView fx:id="listView" layoutX="16.0" layoutY="60.0" prefHeight="464.0" prefWidth="301.0" />
    </children>
 </AnchorPane>
