@@ -11,8 +11,7 @@ import java.util.*;
 
 public class GlobalUser implements Serializable {
 
-
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -24,7 +23,7 @@ public class GlobalUser implements Serializable {
 
     public boolean isUserLoggedIn;
 
-    public GlobalUser(){
+    public GlobalUser() {
         allUsers = new ArrayList<User>();
 
         // add admin as first user to the arraylist
@@ -47,7 +46,7 @@ public class GlobalUser implements Serializable {
         allUsers.remove(u);
     }
 
-    public boolean checkUser(String username)  {
+    public boolean checkUser(String username) {
         int userIndex = -1;
         for (int i = 0; i < allUsers.size(); i++) {
             if (allUsers.get(i).getUsername().equals(username)) {
