@@ -69,8 +69,6 @@ public class UserController implements LogoutController {
     // When the scene loads the page updates the album albumlistview
     public void start(Stage stage) {
         update();
-
-        stage.setTitle(" Collection of Photos");
         if (!albumlist.isEmpty()) {
             albumlistview.getSelectionModel().select(0);
         }
@@ -222,15 +220,20 @@ public class UserController implements LogoutController {
 
     @FXML
     public void onMouseClicked(MouseEvent event) throws IOException {
-        if (event.getButton().equals(MouseButton.PRIMARY)) {
-            if (event.getClickCount() == 2) {
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(event.getClickCount() == 2){
+
+                PhotosDisplayController.currentUser = user;
+                PhotosDisplayController.album = albumlistview.getSelectionModel().getSelectedItem();
+                // PhotoViewController.albumlist = albumlist;
+
                 // System.out.println("Double clicked");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PhotosDisplay.fxml"));
                 Parent root = (Parent) loader.load();
                 PhotosDisplayController pDisplayController = loader.getController();
                 Scene adminSettingsScene = new Scene(root);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                pDisplayController.start();
+                pDisplayController.start(appStage);
                 appStage.setScene(adminSettingsScene);
                 appStage.show();
             }
