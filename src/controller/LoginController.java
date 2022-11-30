@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -58,7 +60,7 @@ public class LoginController {
             // User currentUser = gu.getCurrentUser();
             System.out.println("Hi" + gu.getAllUsers());
             UserController.username = user;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SceneB1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserAlbums.fxml"));
             Parent root = (Parent) loader.load();
 
             UserController userController = loader.getController();
