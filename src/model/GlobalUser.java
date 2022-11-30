@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
+import application.Photos;
+
 public class GlobalUser implements Serializable {
 
 
@@ -109,6 +111,17 @@ public class GlobalUser implements Serializable {
         }
         return false;
     }
+
+    public int getCurrentUserIndex() {
+		int index = 0;
+		for(User user : allUsers) {
+			if(user.getUsername().equals(Photos.gu.getCurrentUser().getUsername())) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
 
     // save current state of the app to the txt file
     public static void saveGlobalUser(GlobalUser gu) throws IOException {

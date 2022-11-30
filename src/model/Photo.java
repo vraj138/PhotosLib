@@ -17,6 +17,7 @@ public class Photo implements Serializable {
     public Boolean stockPhoto;
     public ArrayList<Tag> tags;
 
+	private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -32,6 +33,14 @@ public class Photo implements Serializable {
         this.tags = new ArrayList<Tag>();
 
         // need to get current date and store it in date variable
+    }
+
+    public String getPhotoName(){
+        return this.name;
+    }
+
+    public String getPhotoCaption(){
+        return this.caption;
     }
 
     // save current state of the app to the .dat file
