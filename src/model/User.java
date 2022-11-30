@@ -14,6 +14,8 @@ public class User implements Serializable {
     public ArrayList<Album> userAlbums;
     public Album currentAlbum;
 
+
+	private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -54,9 +56,9 @@ public class User implements Serializable {
     }
 
     // check if an album is created by this user or not
-    public boolean exists(Album albumname) {
+    public boolean exists(String albumname) {
         for (Album album : userAlbums) {
-            if (album.getAlbumName().equals(albumname.albumName)) {
+            if (album.getAlbumName().equals(albumname)) {
                 return true;
             }
         }
@@ -100,6 +102,7 @@ public class User implements Serializable {
     public Album getAlbum(int index) {
         return userAlbums.get(index);
     }
+
 
     // save current state of the app to the txt file
     public static void saveUser(User u) throws IOException {

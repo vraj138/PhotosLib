@@ -24,20 +24,29 @@ import model.GlobalUser;
 import model.User;
 
 public class UserController implements LogoutController{
+    
     @FXML
     public ListView<Album> albumlistview;
 
     @FXML
-    public Button mLogOut, mDisplay, mOpenAlbum, mRenameAlbum, mDeleteAlbum, mSearch, mAddAlbum;
+    public Text dateRange, numOfPhotos;
 
     @FXML
-    public MenuButton mSortBy;
+    public Button createAlbumBtn, deleteAlbumBtn, logOutBtn,renameAlbumBtn, searchPhotosBtn;
 
-    @FXML
-    public Text tUser, tNumber, tDateSpan;
+    
 
-    @FXML
-    public TextField tfName, tfNewAlbum;
+    // @FXML
+    // public Button mLogOut, mDisplay, mOpenAlbum, mRenameAlbum, mDeleteAlbum, mSearch, mAddAlbum;
+
+    // @FXML
+    // public MenuButton mSortBy;
+
+    // @FXML
+    // public Text tUser, tNumber, tDateSpan;
+
+    // @FXML
+    // public TextField tfName, tfNewAlbum;
 
     public static String username;
 
@@ -86,80 +95,6 @@ public class UserController implements LogoutController{
 
     // albumlistview.getSelectionModel().selectedItemProperty()
     // .addListener((v, oldValue, newValue) -> updateContent(newValue));
-    // }
-
-    // sorts alphabetically, A-first to Z-last
-    // public void sortByAZ() throws IOException {
-    // Collections.sort(albumlist, Album.sortByAZ);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
-    // }
-
-    /**
-     * Sorts alphabetically, Z-first to A-last
-     * 
-     * @throws IOException
-     */
-    // public void sortByZA() throws IOException {
-    // Collections.sort(albumlist, Album.sortByZA);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
-    // }
-
-    /**
-     * Sorts by album size, increasing
-     * 
-     * @throws IOException
-     */
-    // public void sortByIP() throws IOException {
-    // Collections.sort(albumlist, Album.sortByIP);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
-    // }
-
-    /**
-     * Sorts by album size, decreasing
-     * 
-     * @throws IOException
-     */
-    // public void sortByDP() throws IOException {
-    // Collections.sort(albumlist, Album.sortByDP);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
-    // }
-
-    /**
-     * Sort by oldest to newest date
-     * 
-     * @throws IOException
-     */
-    // public void sortByID() throws IOException {
-    // Collections.sort(albumlist, Album.sortByID);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
-    // }
-
-    /**
-     * Sort by newest to oldest date
-     * 
-     * @throws IOException
-     */
-    // public void sortByDD() throws IOException {
-    // Collections.sort(albumlist, Album.sortByDD);
-    // observableList = FXCollections.observableArrayList(albumlist);
-    // albumlistview.setItems(observableList);
-    // albumlistview.refresh();
-    // User.saveUser(user);
     // }
 
     /**
@@ -223,47 +158,47 @@ public class UserController implements LogoutController{
      * @throws IOException
      */
     public void renameAlbum() throws IOException {
-        String newName = tfName.getText().trim();
+    //     String newName = tfName.getText().trim();
 
-        int index = albumlistview.getSelectionModel().getSelectedIndex();
-        Album album = user.getAlbum(index);
-        Optional<ButtonType> result;
-        Album tempAlbum = new Album(newName);
+    //     int index = albumlistview.getSelectionModel().getSelectedIndex();
+    //     Album album = user.getAlbum(index);
+    //     Optional<ButtonType> result;
+    //     Album tempAlbum = new Album(newName);
 
-        if (newName.length() == 0) {
-            Alert alert2 = new Alert(AlertType.ERROR);
-            alert2.setTitle("Rename Error");
-            alert2.setContentText("Please enter a valid album name.");
-            alert2.showAndWait();
-            return;
-        } else if (newName.equals(album.albumName)) {
-            Alert alert2 = new Alert(AlertType.ERROR);
-            alert2.setTitle("Rename Error");
-            alert2.setContentText("No changes made. Please enter a valid album name before clicking 'Rename'.");
-            alert2.showAndWait();
-            return;
-        } else if (user.exists(tempAlbum)) {
-            Alert alert2 = new Alert(AlertType.ERROR);
-            alert2.setTitle("Rename Error");
-            alert2.setContentText("Album name already in use.");
-            alert2.showAndWait();
-            return;
-        } else {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Rename");
-            alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to rename this album?");
-            result = alert.showAndWait();
-        }
+    //     if (newName.length() == 0) {
+    //         Alert alert2 = new Alert(AlertType.ERROR);
+    //         alert2.setTitle("Rename Error");
+    //         alert2.setContentText("Please enter a valid album name.");
+    //         alert2.showAndWait();
+    //         return;
+    //     } else if (newName.equals(album.albumName)) {
+    //         Alert alert2 = new Alert(AlertType.ERROR);
+    //         alert2.setTitle("Rename Error");
+    //         alert2.setContentText("No changes made. Please enter a valid album name before clicking 'Rename'.");
+    //         alert2.showAndWait();
+    //         return;
+    //     } else if (user.exists(tempAlbum)) {
+    //         Alert alert2 = new Alert(AlertType.ERROR);
+    //         alert2.setTitle("Rename Error");
+    //         alert2.setContentText("Album name already in use.");
+    //         alert2.showAndWait();
+    //         return;
+    //     } else {
+    //         Alert alert = new Alert(AlertType.CONFIRMATION);
+    //         alert.setTitle("Confirm Rename");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText("Are you sure you want to rename this album?");
+    //         result = alert.showAndWait();
+    //     }
 
-        if (result.get() == ButtonType.OK) {
-            album.setAlbumName(newName);
-            update();
-            User.saveUser(user);
-        } else {
-            return;
-        }
-        return;
+    //     if (result.get() == ButtonType.OK) {
+    //         album.setAlbumName(newName);
+    //         update();
+    //         User.saveUser(user);
+    //     } else {
+    //         return;
+    //     }
+    //     return;
     }
 
     /**
@@ -312,34 +247,34 @@ public class UserController implements LogoutController{
      * @throws IOException
      */
     public void deleteAlbum() throws IOException {
-        int index = albumlistview.getSelectionModel().getSelectedIndex();
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Delete");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this album?");
+        // int index = albumlistview.getSelectionModel().getSelectedIndex();
+        // Alert alert = new Alert(AlertType.CONFIRMATION);
+        // alert.setTitle("Confirm Delete");
+        // alert.setHeaderText(null);
+        // alert.setContentText("Are you sure you want to delete this album?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            user.removeAlbum(index);
-            update();
-            User.saveUser(user);
+        // Optional<ButtonType> result = alert.showAndWait();
+        // if (result.get() == ButtonType.OK) {
+        //     user.removeAlbum(index);
+        //     update();
+        //     User.saveUser(user);
 
-            if (user.getAllAlbums().size() == 0) {
-                mDeleteAlbum.setVisible(false);
-            } else {
-                int lastuserindex = user.getAllAlbums().size();
-                if (user.getAllAlbums().size() == 1) {
-                    albumlistview.getSelectionModel().select(0);
-                } else if (index == lastuserindex) {
-                    albumlistview.getSelectionModel().select(lastuserindex - 1);
-                } else {
-                    albumlistview.getSelectionModel().select(index);
-                }
-            }
-        } else {
-            return;
-        }
-        return;
+        //     if (user.getAllAlbums().size() == 0) {
+        //         mDeleteAlbum.setVisible(false);
+        //     } else {
+        //         int lastuserindex = user.getAllAlbums().size();
+        //         if (user.getAllAlbums().size() == 1) {
+        //             albumlistview.getSelectionModel().select(0);
+        //         } else if (index == lastuserindex) {
+        //             albumlistview.getSelectionModel().select(lastuserindex - 1);
+        //         } else {
+        //             albumlistview.getSelectionModel().select(index);
+        //         }
+        //     }
+        // } else {
+        //     return;
+        // }
+        // return;
     }
 
     /**
@@ -385,9 +320,9 @@ public class UserController implements LogoutController{
         albumlist.clear();
 
         // fill the albumlist with the albums that the logged in user created
-        // for (int i = 0; i < user.getAllAlbums().size(); i++) {
-        //     albumlist.add(user.getAllAlbums().get(i));
-        // }
+        for (int i = 0; i < user.getAllAlbums().size(); i++) {
+            albumlist.add(user.getAllAlbums().get(i));
+        }
 
         observableList = FXCollections.observableArrayList(albumlist);
         albumlistview.setItems(observableList);
@@ -395,7 +330,7 @@ public class UserController implements LogoutController{
     }
 
     @FXML
-    void onCreateAlbum(ActionEvent event) throws IOException {
+    public void onCreateAlbum(ActionEvent event) throws IOException {
         TextInputDialog userDialog = new TextInputDialog();
         userDialog.setTitle("Create Album");
         userDialog.setHeaderText(null);
@@ -403,27 +338,23 @@ public class UserController implements LogoutController{
         userDialog.setGraphic(null);
 
         Optional<String> result = userDialog.showAndWait();
-        tfNewAlbum = userDialog.getEditor();
-        String albumname = tfNewAlbum.getText().trim();
-        Album album = new Album(albumname);
+        TextField newName = userDialog.getEditor();
+        String albumname = newName.getText().trim();
+        // Album album = new Album(albumname);
 
         if (result.isPresent()) {
-            if (albumname.isEmpty() || albumname == null) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Empty Field");
-                alert.setContentText("Please enter an album name.");
-                alert.showAndWait();
-                return;
-            } else if (user.exists(album)) {
+            
+            if(user.exists(albumname)) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Album already exists.");
                 alert.setContentText("Try entering a new album!");
                 alert.showAndWait();
                 return;
             } else {
-                user.addNewAlbum(album);
+                user.addNewAlbum(new Album(albumname));
+                System.out.println("Albums: " + user.getAllAlbums());
                 update();
-                tfNewAlbum.clear();
+                newName.clear();
             }
             User.saveUser(user);
         } else{
@@ -435,43 +366,44 @@ public class UserController implements LogoutController{
     }
 
     @FXML
-    void onDeleteAlbum(ActionEvent event) throws IOException {
-        int index = albumlistview.getSelectionModel().getSelectedIndex();
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Delete");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this album?");
+    public void onDeleteAlbum(ActionEvent event) throws IOException {
+        // int index = albumlistview.getSelectionModel().getSelectedIndex();
+        // Alert alert = new Alert(AlertType.CONFIRMATION);
+        // alert.setTitle("Confirm Delete");
+        // alert.setHeaderText(null);
+        // alert.setContentText("Are you sure you want to delete this album?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            user.removeAlbum(index);
-            update();
-            User.saveUser(user);
+        // Optional<ButtonType> result = alert.showAndWait();
+        // if (result.get() == ButtonType.OK) {
+        //     user.removeAlbum(index);
+        //     update();
+        //     User.saveUser(user);
 
-            if (user.getAllAlbums().size() == 0) {
-                mDeleteAlbum.setVisible(false);
-            } else {
-                int lastuserindex = user.getAllAlbums().size();
-                if (user.getAllAlbums().size() == 1) {
-                    albumlistview.getSelectionModel().select(0);
-                } else if (index == lastuserindex) {
-                    albumlistview.getSelectionModel().select(lastuserindex - 1);
-                } else {
-                    albumlistview.getSelectionModel().select(index);
-                }
-            }
-        } else {
-            alert.close();
-        }
+        //     if (user.getAllAlbums().size() == 0) {
+        //         deleteAlbumBtn.setVisible(false);
+        //     } else {
+        //         // deleteAlbumBtn.setVisible(true);
+        //         int lastuserindex = user.getAllAlbums().size();
+        //         if (user.getAllAlbums().size() == 1) {
+        //             albumlistview.getSelectionModel().select(0);
+        //         } else if (index == lastuserindex) {
+        //             albumlistview.getSelectionModel().select(lastuserindex - 1);
+        //         } else {
+        //             albumlistview.getSelectionModel().select(index);
+        //         }
+        //     }
+        // } else {
+        //     alert.close();
+        // }
     }
 
     @FXML
-    void onLogOutBtnClicked(ActionEvent event) throws IOException {
+    public void onLogOutBtnClicked(ActionEvent event) throws IOException {
         logUserOut(event);
     }
 
     @FXML
-    void onRenameAlbum(ActionEvent event) throws IOException {
+    public void onRenameAlbum(ActionEvent event) throws IOException {
         TextInputDialog userDialog = new TextInputDialog();
         userDialog.setTitle("Rename Album");
         userDialog.setHeaderText(null);
@@ -479,48 +411,31 @@ public class UserController implements LogoutController{
         userDialog.setGraphic(null);
 
         Optional<String> result = userDialog.showAndWait();
-        tfName = userDialog.getEditor();
+        TextField newName = userDialog.getEditor();
 
-        String newName = tfName.getText().trim();
+        String newReName = newName.getText().trim();
 
         int index = albumlistview.getSelectionModel().getSelectedIndex();
         Album album = user.getAlbum(index);
-        Optional<ButtonType> result1;
-        Album tempAlbum = new Album(newName);
+        Album tempAlbum = new Album(newReName);
 
         if (result.isPresent()) {
-            if (newName.length() == 0) {
+            if(newReName.equals(album.getAlbumName())) {
                 Alert alert2 = new Alert(AlertType.ERROR);
                 alert2.setTitle("Rename Error");
-                alert2.setContentText("Please enter a valid album name.");
+                alert2.setContentText("Cannot use same name again");
                 alert2.showAndWait();
                 return;
-            } else if (newName.equals(album.albumName)) {
-                Alert alert2 = new Alert(AlertType.ERROR);
-                alert2.setTitle("Rename Error");
-                alert2.setContentText("No changes made. Please enter a valid album name before clicking 'Rename'.");
-                alert2.showAndWait();
-                return;
-            } else if (user.exists(tempAlbum)) {
+            } else if (user.albumExists(tempAlbum)) {
                 Alert alert2 = new Alert(AlertType.ERROR);
                 alert2.setTitle("Rename Error");
                 alert2.setContentText("Album name already in use.");
                 alert2.showAndWait();
                 return;
             } else {
-                Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setTitle("Confirm Rename");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to rename this album?");
-                result1 = alert.showAndWait();
-            }
-
-            if (result1.get() == ButtonType.OK) {
-                album.setAlbumName(newName);
+                album.setAlbumName(newReName);
                 update();
                 User.saveUser(user);
-            } else {
-                return;
             }
         }else{
             userDialog.close();
@@ -528,7 +443,7 @@ public class UserController implements LogoutController{
     }
 
     @FXML
-    void onSearchPhotos(ActionEvent event) {
+    public void onSearchPhotos(ActionEvent event) {
 
     }
 }

@@ -111,9 +111,9 @@ public class GlobalUser implements Serializable {
     }
 
     // save current state of the app to the txt file
-    public static void saveGlobalUser(GlobalUser gu) throws IOException {
+    public static void saveGlobalUser(GlobalUser u) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
-        oos.writeObject(gu);
+        oos.writeObject(u);
         oos.close();
     }
 

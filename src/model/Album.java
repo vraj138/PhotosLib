@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
-public class Album {
+public class Album implements Serializable {
+	private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -66,9 +68,9 @@ public class Album {
     }
 
     // save current state of the app to the dat file
-    public static void saveAlbum(Album a) throws IOException {
+    public static void saveAlbum(Album u) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
-        oos.writeObject(a);
+        oos.writeObject(u);
         oos.close();
     }
 
@@ -80,11 +82,6 @@ public class Album {
         return userList;
     }
 
-    // we want to sort album names alphabetically
-    public static Comparator<Album> sortAlphabetically = new Comparator<Album>() {
-        public int compare(Album a, Album b) {
-            return a.albumName.compareTo(b.albumName);
-        }
-    };
+
 
 }
