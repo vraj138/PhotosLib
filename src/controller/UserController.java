@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -34,7 +35,10 @@ public class UserController implements LogoutController {
     public ListView<Album> albumlistview;
 
     @FXML
-    public Text dateRange, numOfPhotos;
+    public Label tfNumPhotos;
+
+    @FXML
+    public Text tfDateRange;
 
     @FXML
     public Button createAlbumBtn, deleteAlbumBtn, logOutBtn, renameAlbumBtn, searchPhotosBtn;
@@ -72,6 +76,12 @@ public class UserController implements LogoutController {
         if (!albumlist.isEmpty()) {
             albumlistview.getSelectionModel().select(0);
         }
+
+        if (albumlist.size() > 0) {
+			tfNumPhotos.setText(albumlist.get(0).numPhotos + "");
+			tfDateRange.setText("Date Range: \n\t" +albumlist.get(0).getFirstDate() + "\n\t" + albumlist.get(0).getLastDate());
+		}
+		albumlistview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateAlbumDetails(newValue) );
 
     }
 
@@ -216,7 +226,12 @@ public class UserController implements LogoutController {
         appStage.show();
     }
 
-    //
+    public void updateAlbumDetails(Album newValue) {
+		if (albumlist.size() > 0) {
+			tfNumPhotos.setText(newValue.numPhotos + "");
+			tfDateRange.setText("Date Range: \n\t" +newValue.getFirstDate() + "\n\t" + newValue.getLastDate());
+		}
+	}
 
     @FXML
     public void onMouseClicked(MouseEvent event) throws IOException {
@@ -225,7 +240,7 @@ public class UserController implements LogoutController {
 
                 PhotosDisplayController.currentUser = user;
                 PhotosDisplayController.album = albumlistview.getSelectionModel().getSelectedItem();
-                // PhotoViewController.albumlist = albumlist;
+                PhotosDisplayController.allUserAlbums = albumlist;
 
                 // System.out.println("Double clicked");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PhotosDisplay.fxml"));

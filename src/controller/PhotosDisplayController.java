@@ -17,9 +17,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -35,18 +38,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.ButtonType;
 
 public class PhotosDisplayController implements LogoutController{
 
     @FXML
-    public Button addPhotosBtn, backBtn, copyPhotoBtn, editCaptionBtn, logOutBtn, movePhotoBtn, removePhotosBtn;
+    public Button addPhotosBtn, backBtn, copyPhotoBtn, setCaptionBtn, logOutBtn, movePhotoBtn, removePhotosBtn;
 
     @FXML
     public TextField tfCopyAlbum, tfMoveAlbum;
 
     @FXML
-    public Label albumNameLabel, captionLabel;
+    public Label albumNameLabel ;
 
     @FXML
     public ListView<Photo> photoListview;
@@ -62,6 +66,8 @@ public class PhotosDisplayController implements LogoutController{
 	public static Album album; 
 
     public static GlobalUser gu = Photos.gu;
+
+    public static Photo p;
 
     public void start(Stage appStage){
 
@@ -95,8 +101,8 @@ public class PhotosDisplayController implements LogoutController{
 				Photo newPhoto;
 				if(gu.getCurrentUser().getUsername().equals("stock")) {
 					int index;
-					if (filepath.contains("stockphotos")) {
-						index = filepath.indexOf("stockphotos");
+					if (filepath.contains("data/stockphotos")) {
+						index = filepath.indexOf("data/stockphotos");
 						String newfilepath = filepath.substring(index,filepath.length());
 						Photo newPhoto2 = new Photo(photoFile, newfilepath);
 						newPhoto2.stockPhoto = true;
@@ -104,7 +110,7 @@ public class PhotosDisplayController implements LogoutController{
 					} else {
                         
 						newPhoto = new Photo(photoFile, filepath);	
-                        for(int i = 0; i <= album.getAllPhotos().size(); i++){
+                        for(int i = 0; i < album.getAllPhotos().size(); i++){
                             System.out.println("Inside for loop");
                             if(album.getAllPhotos().get(i).getPhotoName().equals(newPhoto.getPhotoName())){
                                 Alert alert = new Alert(AlertType.ERROR);
@@ -128,32 +134,33 @@ public class PhotosDisplayController implements LogoutController{
 				} else {
                     System.out.println("Inside else");
 					newPhoto = new Photo(photoFile, filepath);	
-                    if(album.getAllPhotos().size() == 0){
-                        System.out.println("Inside if");
-                        album.addPhotoToAlbum(newPhoto);
-                        update();
-                        return;
-                    }
-                    for(int i = 0; i <= album.getAllPhotos().size(); i++){
-                        System.out.println("Inside for loop");
-                        if(album.getAllPhotos().get(i).getPhotoName().equals(newPhoto.getPhotoName())){
-                            Alert alert = new Alert(AlertType.ERROR);
-                            alert.setTitle("Add Photo Error");
-                            alert.setHeaderText("Cannot add same photo again");
-                            alert.showAndWait();
-                            Optional<ButtonType> buttonClicked=alert.showAndWait();
-                            if (buttonClicked.get()==ButtonType.OK) {
-                                alert.close();
-                            }
-                            else {
-                                alert.close();
-                            }
-                        }else{
-                            album.addPhotoToAlbum(newPhoto);
-                            update();
-                        }
-                    }
-					// album.addPhotoToAlbum(newPhoto);
+                    // if(album.getAllPhotos().size() == 0){
+                    //     System.out.println("Inside if");
+                    //     album.addPhotoToAlbum(newPhoto);
+                    //     update();
+                    //     return;
+                    // }
+                    // for(int i = 0; i <= album.getAllPhotos().size(); i++){
+                    //     System.out.println("Inside for loop");
+                    //     if(album.getAllPhotos().get(i).getPhotoName().equals(newPhoto.getPhotoName())){
+                    //         Alert alert = new Alert(AlertType.ERROR);
+                    //         alert.setTitle("Add Photo Error");
+                    //         alert.setHeaderText("Cannot add same photo again");
+                    //         alert.showAndWait();
+                    //         Optional<ButtonType> buttonClicked=alert.showAndWait();
+                    //         if (buttonClicked.get()==ButtonType.OK) {
+                    //             alert.close();
+                    //         }
+                    //         else {
+                    //             alert.close();
+                    //         }
+                    //     }else{
+                    //         album.addPhotoToAlbum(newPhoto);
+                    //         update();
+                    //     }
+                    // }
+					album.addPhotoToAlbum(newPhoto);
+                    
                     for (int i = 0; i < album.getAllPhotos().size(); i++) {
                         System.out.println(album.getAllPhotos().get(i).getPhotoName());
                     }
@@ -168,7 +175,7 @@ public class PhotosDisplayController implements LogoutController{
     		photoListview.getSelectionModel().select(0); //select first user
 		}
 		
-		// Album.saveAlbum(album);
+		Album.saveAlbum(album);
 		
     }
 
@@ -192,7 +199,7 @@ public class PhotosDisplayController implements LogoutController{
         String destAlbumName = tfCopyAlbum.getText().trim();
 		boolean checkAlbuminList = false;
 		int albumIndex = 0;
-		for (int i = 0; i < allUserAlbums.size(); i++) {
+		for (int i = 0; i <= allUserAlbums.size(); i++) {
 			Album x = allUserAlbums.get(i);
 			if (x.getAlbumName().equals(destAlbumName)) {
 				checkAlbuminList = true;
@@ -206,7 +213,19 @@ public class PhotosDisplayController implements LogoutController{
             Album newAlbum = allUserAlbums.get(albumIndex);
             Photo photo = photoListview.getSelectionModel().getSelectedItem();
             newAlbum.addPhotoToAlbum(photo);
-            
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Copy Photo Confirmation");
+			alert.setHeaderText("Photo Copied Successfully.");
+            alert.setGraphic(null);
+			alert.showAndWait();
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+			return;
             // newAlbum.save(newAlbum);
 
 		} else {
@@ -223,13 +242,37 @@ public class PhotosDisplayController implements LogoutController{
 			}
 			return;
 		}
-		System.out.println("move");
     }
 
-    @FXML
-    public void onEditCaptionBtn(ActionEvent event) {
+    // @FXML
+    // public void onSetCaptionBtn(ActionEvent event) throws IOException {
+        // boolean checked = false;
+        // for (int i = 0; i < albumPhotos.size(); i++) {
+        //     if (photoListview.getSelectionModel().isSelected(i)) {
+        //         checked = true;
+        //     }
+        // }
+        // if(checked){
+        //     TextInputDialog userDialog = new TextInputDialog();
+        //     userDialog.setTitle("Set Caption");
+        //     userDialog.setHeaderText(null);
+        //     userDialog.setContentText("Enter Caption: ");
+        //     userDialog.setGraphic(null);
 
-    }
+        //     Optional<String> result = userDialog.showAndWait();
+        //     TextField newCaption = userDialog.getEditor();
+        //     String captionName = newCaption.getText().trim();
+        //     // Album album = new Album(albumname);
+
+        //     if (result.isPresent()) {
+        //         p.setPhotoCaption(captionName);
+        //         p.savePhoto(p);
+        //     }
+        // }else{
+
+        // }
+            
+    // }
 
     @FXML
     public void onLogOutBtnClicked(ActionEvent event) throws IOException {
@@ -237,8 +280,51 @@ public class PhotosDisplayController implements LogoutController{
     }
 
     @FXML
-    public void onMovePhotoBtn(ActionEvent event) {
+    public void onMovePhotoBtn(ActionEvent event) throws IOException {
+        String destAlbumName = tfMoveAlbum.getText().trim();
+		boolean checkAlbuminList = false;
+		int albumIndex = 0;
+		for (int i = 0; i <= allUserAlbums.size(); i++) {
+			Album x = allUserAlbums.get(i);
+			if (x.getAlbumName().equals(destAlbumName)) {
+				checkAlbuminList = true;
+				albumIndex = i;
+			}
+		}
 
+		if (!destAlbumName.isEmpty() && checkAlbuminList) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirm Photo Operation");
+			alert.setHeaderText(null);
+			alert.setContentText("Are you sure you want to move this photo to " + destAlbumName + "?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) { 
+				Album newAlbum = allUserAlbums.get(albumIndex);
+				Photo photo = photoListview.getSelectionModel().getSelectedItem();
+				newAlbum.addPhotoToAlbum(photo);
+				album.deletePhotoToAlbum(photoListview.getSelectionModel().getSelectedIndex());
+				
+				// newAlbum.saveAlbum(newAlbum);
+				// album.saveAlbum(album);
+				update();
+			} else {
+				return;
+			}
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Move Photo Error");
+			alert.setHeaderText("Album not found or does not exist.");
+			alert.showAndWait();
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+			return;
+		}
     }
 
     @FXML
@@ -277,7 +363,7 @@ public class PhotosDisplayController implements LogoutController{
 		}
 
 		observableList = FXCollections.observableArrayList(albumPhotos);
-        System.out.println(observableList);
+        // System.out.println(observableList);
 		photoListview.setItems(observableList);
 		photoListview.refresh();
 
@@ -290,10 +376,9 @@ public class PhotosDisplayController implements LogoutController{
 		});
 		
 	    if(!observableList.isEmpty()) {
-	    		photoListview.getSelectionModel().select(0); //select first photo of album
+            photoListview.getSelectionModel().select(0); //select first photo of album
 	    }
-        
-        // captionLabel.setText(photoListview.getSelectionModel().getSelectedItem().getPhotoCaption());
+    
 	}
 
     private class Results extends ListCell<Photo>{
@@ -338,6 +423,29 @@ public class PhotosDisplayController implements LogoutController{
 			
 		}
 	}
+
+	@FXML
+    public void onMouseClicked(MouseEvent event) throws IOException {
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(event.getClickCount() == 2){
+
+                // System.out.println("Double clicked");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SinglePhoto.fxml"));
+                Parent root = (Parent) loader.load();
+                SinglePhotoController spController = loader.getController();
+				SinglePhotoController.photo = photoListview.getSelectionModel().getSelectedItem();
+				SinglePhotoController.userAlbum = album;
+                Scene adminSettingsScene = new Scene(root);
+                Stage appStage = new Stage();
+                spController.start(appStage);
+                appStage.setScene(adminSettingsScene);
+				appStage.setResizable(false);
+				appStage.setX(100);
+				appStage.setY(100);
+                appStage.show();
+            }
+        }
+    }
 
 }
 
