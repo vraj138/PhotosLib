@@ -11,6 +11,9 @@ import java.util.*;
 
 import application.Photos;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class GlobalUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,19 +38,32 @@ public class GlobalUser implements Serializable {
         this.isUserLoggedIn = false;
     }
 
+    /**
+     * @param username
+     */
     public void addUser(String username) {
         allUsers.add(new User(username));
     }
 
+    /**
+     * @param index
+     */
     public void deleteUser(int index) {
         allUsers.remove(index);
     }
 
+    /**
+     * @param username
+     */
     public void deleteUserByUsername(String username) {
         User u = new User(username);
         allUsers.remove(u);
     }
 
+    /**
+     * @param username
+     * @return boolean
+     */
     public boolean checkUser(String username) {
         int userIndex = -1;
         for (int i = 0; i < allUsers.size(); i++) {
@@ -67,18 +83,30 @@ public class GlobalUser implements Serializable {
         return true;
     }
 
+    /**
+     * @return User
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * @param u
+     */
     public void setCurrentUser(User u) {
         this.currentUser = u;
     }
 
+    /**
+     * @return ArrayList<User>
+     */
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
 
+    /**
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getAllUsernames() {
         ArrayList<String> names = new ArrayList<String>();
         for (User u : allUsers) {
@@ -88,10 +116,17 @@ public class GlobalUser implements Serializable {
         return names;
     }
 
+    /**
+     * @param users
+     */
     public void setAllUsers(ArrayList<User> users) {
         this.allUsers = users;
     }
 
+    /**
+     * @param username
+     * @return User
+     */
     public User getUser(String username) {
         for (User u : allUsers) {
             if (u.getUsername().equals(username)) {
@@ -102,6 +137,10 @@ public class GlobalUser implements Serializable {
         return null;
     }
 
+    /**
+     * @param username
+     * @return boolean
+     */
     public boolean userExists(String username) {
         for (User user : allUsers) {
             if (user.getUsername().equals(username)) {
@@ -111,17 +150,24 @@ public class GlobalUser implements Serializable {
         return false;
     }
 
+    /**
+     * @return int
+     */
     public int getCurrentUserIndex() {
-		int index = 0;
-		for(User user : allUsers) {
-			if(user.getUsername().equals(Photos.gu.getCurrentUser().getUsername())) {
-				return index;
-			}
-			index++;
-		}
-		return -1;
-	}
+        int index = 0;
+        for (User user : allUsers) {
+            if (user.getUsername().equals(Photos.gu.getCurrentUser().getUsername())) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
 
+    /**
+     * @param gu
+     * @throws IOException
+     */
     // save current state of the app to the txt file
     public static void saveGlobalUser(GlobalUser gu) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
@@ -129,6 +175,11 @@ public class GlobalUser implements Serializable {
         oos.close();
     }
 
+    /**
+     * @return GlobalUser
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     // deserializing objects from storage
     public static GlobalUser loadGlobalUser() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));

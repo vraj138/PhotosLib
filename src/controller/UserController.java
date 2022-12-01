@@ -29,6 +29,9 @@ import model.Album;
 import model.GlobalUser;
 import model.User;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class UserController implements LogoutController {
 
     @FXML
@@ -70,6 +73,9 @@ public class UserController implements LogoutController {
      */
     public static boolean stock;
 
+    /**
+     * @param stage
+     */
     // When the scene loads the page updates the album albumlistview
     public void start(Stage stage) {
         update();
@@ -78,10 +84,12 @@ public class UserController implements LogoutController {
         }
 
         if (albumlist.size() > 0) {
-			tfNumPhotos.setText(albumlist.get(0).numPhotos + "");
-			tfDateRange.setText("Date Range: \n\t" +albumlist.get(0).getFirstDate() + "\n\t" + albumlist.get(0).getLastDate());
-		}
-		albumlistview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateAlbumDetails(newValue) );
+            tfNumPhotos.setText(albumlist.get(0).numPhotos + "");
+            tfDateRange.setText(
+                    "Date Range: \n\t" + albumlist.get(0).getFirstDate() + "\n\t" + albumlist.get(0).getLastDate());
+        }
+        albumlistview.getSelectionModel().selectedItemProperty()
+                .addListener((v, oldValue, newValue) -> updateAlbumDetails(newValue));
 
     }
 
@@ -107,6 +115,10 @@ public class UserController implements LogoutController {
         albumlistview.refresh();
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onCreateAlbum(ActionEvent event) throws IOException {
         TextInputDialog userDialog = new TextInputDialog();
@@ -130,7 +142,7 @@ public class UserController implements LogoutController {
                 return;
             } else {
                 user.addNewAlbum(new Album(albumname));
-                System.out.println("Albums: " + user.getAllAlbums());
+                // System.out.println("Albums: " + user.getAllAlbums());
                 update();
                 newName.clear();
             }
@@ -141,6 +153,10 @@ public class UserController implements LogoutController {
 
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onDeleteAlbum(ActionEvent event) throws IOException {
         int index = albumlistview.getSelectionModel().getSelectedIndex();
@@ -169,11 +185,19 @@ public class UserController implements LogoutController {
         }
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onLogOutBtnClicked(ActionEvent event) throws IOException {
         logUserOut(event);
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onRenameAlbum(ActionEvent event) throws IOException {
         TextInputDialog userDialog = new TextInputDialog();
@@ -214,6 +238,10 @@ public class UserController implements LogoutController {
         }
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onSearchPhotos(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SearchPhotos.fxml"));
@@ -226,17 +254,24 @@ public class UserController implements LogoutController {
         appStage.show();
     }
 
+    /**
+     * @param newValue
+     */
     public void updateAlbumDetails(Album newValue) {
-		if (albumlist.size() > 0) {
-			tfNumPhotos.setText(newValue.numPhotos + "");
-			tfDateRange.setText("Date Range: \n\t" +newValue.getFirstDate() + "\n\t" + newValue.getLastDate());
-		}
-	}
+        if (albumlist.size() > 0) {
+            tfNumPhotos.setText(newValue.numPhotos + "");
+            tfDateRange.setText("Date Range: \n\t" + newValue.getFirstDate() + "\n\t" + newValue.getLastDate());
+        }
+    }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onMouseClicked(MouseEvent event) throws IOException {
-        if(event.getButton().equals(MouseButton.PRIMARY)){
-            if(event.getClickCount() == 2){
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
+            if (event.getClickCount() == 2) {
 
                 PhotosDisplayController.currentUser = user;
                 PhotosDisplayController.album = albumlistview.getSelectionModel().getSelectedItem();

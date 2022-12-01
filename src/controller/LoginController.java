@@ -19,6 +19,9 @@ import javafx.scene.control.Alert.AlertType;
 import model.GlobalUser;
 import model.*;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class LoginController {
 
     @FXML
@@ -26,12 +29,16 @@ public class LoginController {
 
     public static GlobalUser gu = Photos.gu;
 
+    /**
+     * @param event action event from button clicked
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @FXML
     public void btnLoginClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         // Stage mainWindow = (Stage) username.getScene().getWindow();
         String user = username.getText().trim();
         // System.out.println(gu.getAllUsers());
-        
 
         if (user.equals("admin")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminSettings.fxml"));
@@ -58,7 +65,7 @@ public class LoginController {
 
         } else if (gu.checkUser(user)) {
             // User currentUser = gu.getCurrentUser();
-            System.out.println("Hi" + gu.getAllUsers());
+            // System.out.println("Hi" + gu.getAllUsers());
             UserController.username = user;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserAlbums.fxml"));
             Parent root = (Parent) loader.load();
@@ -86,7 +93,7 @@ public class LoginController {
             }
 
         } else {
-            System.out.println("Incorrect Input");
+            // System.out.println("Incorrect Input");
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Login Issue Encountered");
             alert.setHeaderText("Please enter a valid username");

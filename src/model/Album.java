@@ -10,8 +10,11 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class Album implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     public static final String storeDir = "dat";
     public static final String storeFile = "users.dat";
 
@@ -26,15 +29,24 @@ public class Album implements Serializable {
         this.photoList = new ArrayList<Photo>();
     }
 
+    /**
+     * @return String album name
+     */
     public String getAlbumName() {
         return this.albumName;
     }
 
+    /**
+     * @param newName
+     */
     public void setAlbumName(String newName) {
         // check for newName being null
         this.albumName = newName;
     }
 
+    /**
+     * @param p
+     */
     // add photo to the photo list
     public void addPhotoToAlbum(Photo p) {
         photoList.add(p);
@@ -43,6 +55,9 @@ public class Album implements Serializable {
         numPhotos++;
     }
 
+    /**
+     * @param index
+     */
     // given the index, remove photo from the list
     public void deletePhotoToAlbum(int index) {
         photoList.remove(index);
@@ -51,62 +66,87 @@ public class Album implements Serializable {
         numPhotos--;
     }
 
+    /**
+     * @return ArrayList<Photo>
+     */
     public ArrayList<Photo> getAllPhotos() {
         return photoList;
     }
 
+    /**
+     * @return Photo
+     */
     public Photo getCurrentPhoto() {
         return currPhoto;
     }
 
+    /**
+     * @param p
+     */
     public void setCurrentPhoto(Photo p) {
         this.currPhoto = p;
     }
 
-    public int getIndexByPhoto(Photo p){
+    /**
+     * @param p
+     * @return int
+     */
+    public int getIndexByPhoto(Photo p) {
         return photoList.indexOf(p);
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return getAlbumName();
     }
 
+    /**
+     * @return String
+     */
     public String getFirstDate() {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
-		Date date = null; 
-		String dateStr = "No Date";
-		if (!photoList.isEmpty()) {
-			date = this.getAllPhotos().get(0).date;
-			for (Photo photo: photoList) {
-				if (photo.date.before(date)) {
-					date = photo.date;
-				}
-			}
-			dateStr = dateFormatter.format(date);
-		}
-		
-		return dateStr;
-	}
-	
-	
-	public String getLastDate() {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
-		Date date = null; 
-		String dateStr = "No Date";
-		if (!photoList.isEmpty()) {
-			date = this.getAllPhotos().get(this.getAllPhotos().size()-1).date;
-			for (Photo photo: photoList) {
-				if (photo.date.after(date)) {
-					date = photo.date;
-				}
-			}
-			dateStr = dateFormatter.format(date);
-		}
-		
-		return dateStr;
-	}
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
+        Date date = null;
+        String dateStr = "No Date";
+        if (!photoList.isEmpty()) {
+            date = this.getAllPhotos().get(0).date;
+            for (Photo photo : photoList) {
+                if (photo.date.before(date)) {
+                    date = photo.date;
+                }
+            }
+            dateStr = dateFormatter.format(date);
+        }
 
+        return dateStr;
+    }
+
+    /**
+     * @return String
+     */
+    public String getLastDate() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
+        Date date = null;
+        String dateStr = "No Date";
+        if (!photoList.isEmpty()) {
+            date = this.getAllPhotos().get(this.getAllPhotos().size() - 1).date;
+            for (Photo photo : photoList) {
+                if (photo.date.after(date)) {
+                    date = photo.date;
+                }
+            }
+            dateStr = dateFormatter.format(date);
+        }
+
+        return dateStr;
+    }
+
+    /**
+     * @param u
+     * @throws IOException
+     */
     // save current state of the app to the dat file
     public static void saveAlbum(Album u) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
@@ -114,6 +154,11 @@ public class Album implements Serializable {
         oos.close();
     }
 
+    /**
+     * @return GlobalUser
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     // deserializing objects from storage
     public static GlobalUser loadAlbum() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
@@ -121,7 +166,5 @@ public class Album implements Serializable {
         ois.close();
         return userList;
     }
-
-
 
 }

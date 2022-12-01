@@ -24,60 +24,66 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class SearchPhotosController implements LogoutController {
 
     @FXML
-    public  Button addTagBtn, backBtn, searchByDateBtn, searchByTagsBtn;
+    public Button addTagBtn, backBtn, searchByDateBtn, searchByTagsBtn;
 
     @FXML
-    public  ListView<String> listview;
+    public ListView<String> listview;
 
     @FXML
-    public  TextField tfName, tfValue;
+    public TextField tfName, tfValue;
 
     public ObservableList<String> observableList;
 
     public static GlobalUser adminuser = Photos.gu;
 
-	public ArrayList<Tag> listOfTags = new ArrayList<Tag>();
+    public ArrayList<Tag> listOfTags = new ArrayList<Tag>();
 
-	public ArrayList<String> displayListOfTags = new ArrayList<String>();
-
+    public ArrayList<String> displayListOfTags = new ArrayList<String>();
 
     public void start() {
         // update();
         // if (!allUsernames.isEmpty()) {
-        //     listView.getSelectionModel().select(0);
+        // listView.getSelectionModel().select(0);
         // }
         // listView.setItems(usernamesList);
         // listView.refresh();
     }
 
-
+    /**
+     * @param event
+     */
     @FXML
     public void onAddTagBtn(ActionEvent event) {
-        
 
-        if(tfName.getText().trim().isEmpty() || tfValue.getText().trim().isEmpty()) {
-			Alert alert = new Alert(AlertType.ERROR);
+        if (tfName.getText().trim().isEmpty() || tfValue.getText().trim().isEmpty()) {
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Missing Values");
             alert.setHeaderText("Enter a key and its value!");
             alert.setContentText("The key and value must be filled!");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get()==ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
+                alert.close();
+            } else {
                 alert.close();
             }
-            else {
-                alert.close();
-            }
-			return;		
-		}
-		Tag tag = new Tag(tfName.getText().trim(), tfValue.getText().trim());
-		listOfTags.add(tag);
-		update();
+            return;
+        }
+        Tag tag = new Tag(tfName.getText().trim(), tfValue.getText().trim());
+        listOfTags.add(tag);
+        update();
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onBackBtnClicked(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserAlbums.fxml"));
@@ -90,32 +96,42 @@ public class SearchPhotosController implements LogoutController {
         appStage.show();
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onLogOutBtnClicked(ActionEvent event) throws IOException {
         logUserOut(event);
     }
 
+    /**
+     * @param event
+     */
     @FXML
     public void onSearchByTagsBtn(ActionEvent event) {
 
     }
 
+    /**
+     * @param event
+     */
     @FXML
     public void onSearchByDateBtn(ActionEvent event) {
 
     }
 
     public void update() {
-		displayListOfTags.clear();
-		for(Tag tag : listOfTags) {
-			displayListOfTags.add(tag.tagName +    " = " + tag.value);
-		}
-		observableList = FXCollections.observableArrayList(displayListOfTags);
-		listview.setItems(observableList);
-		
-		tfName.clear();
-		tfValue.clear();
+        displayListOfTags.clear();
+        for (Tag tag : listOfTags) {
+            displayListOfTags.add(tag.tagName + " = " + tag.value);
+        }
+        observableList = FXCollections.observableArrayList(displayListOfTags);
+        listview.setItems(observableList);
 
-	}
+        tfName.clear();
+        tfValue.clear();
+
+    }
 
 }

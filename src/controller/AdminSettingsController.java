@@ -17,15 +17,11 @@ import java.util.*;
 import application.Photos;
 import model.GlobalUser;
 import model.User;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class AdminSettingsController implements LogoutController {
     @FXML
     public ListView<String> listView;
@@ -64,6 +60,10 @@ public class AdminSettingsController implements LogoutController {
         listView.refresh();
     }
 
+    /**
+     * @param event action event
+     * @throws IOException
+     */
     @FXML
     void onAddUser(ActionEvent event) throws IOException {
         TextInputDialog userDialog = new TextInputDialog();
@@ -85,13 +85,13 @@ public class AdminSettingsController implements LogoutController {
                 alert.setContentText("Username already exists. Try entering a new username!");
                 alert.showAndWait();
                 return;
-            }else if(user.isEmpty() || user == null) {
+            } else if (user.isEmpty() || user == null) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Admin Error");
                 alert.setContentText("Empty Field: Please enter a username.");
                 alert.showAndWait();
                 return;
-            }else if (user.equals("admin")) {
+            } else if (user.equals("admin")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Admin Error");
                 alert.setContentText("Cannot add 'admin' to Users.");
@@ -101,7 +101,7 @@ public class AdminSettingsController implements LogoutController {
                 gu.addUser(user);
                 update();
                 userDialog.close();
-                System.out.println(gu.getAllUsers());
+                // System.out.println(gu.getAllUsers());
             }
             GlobalUser.saveGlobalUser(gu);
 
@@ -110,6 +110,10 @@ public class AdminSettingsController implements LogoutController {
         }
     }
 
+    /**
+     * @param event action event from button clicked
+     * @throws IOException
+     */
     @FXML
     void onDeleteUser(ActionEvent event) throws IOException {
         int index = listView.getSelectionModel().getSelectedIndex();
@@ -124,7 +128,7 @@ public class AdminSettingsController implements LogoutController {
 
             gu.deleteUser(index);
             update();
-            System.out.println("Delete " + gu.getAllUsers());
+            // System.out.println("Delete " + gu.getAllUsers());
             GlobalUser.saveGlobalUser(gu);
 
             if (gu.getAllUsers().size() == 1) {
@@ -147,17 +151,13 @@ public class AdminSettingsController implements LogoutController {
 
     }
 
+    /**
+     * @param event action event from button clicked
+     * @throws IOException
+     */
     @FXML
     void onLogOutBtnClicked(ActionEvent event) throws IOException {
         logUserOut(event);
     }
-
-    // public void saveUsers(ObservableList<String> allUsernames) throws IOException
-    // {
-    // JSONArray allUsernamess = new JSONArray(usernamesList);
-    // try (FileWriter file = new FileWriter("userdata/allUsernamess.json")) {
-    // file.write(allUsernamess.toString());
-    // }
-    // }
 
 }
