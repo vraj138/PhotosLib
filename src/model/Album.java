@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Album implements Serializable {
@@ -62,10 +63,49 @@ public class Album implements Serializable {
         this.currPhoto = p;
     }
 
+    public int getIndexByPhoto(Photo p){
+        return photoList.indexOf(p);
+    }
+
     @Override
     public String toString() {
         return getAlbumName();
     }
+
+    public String getFirstDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
+		Date date = null; 
+		String dateStr = "No Date";
+		if (!photoList.isEmpty()) {
+			date = this.getAllPhotos().get(0).date;
+			for (Photo photo: photoList) {
+				if (photo.date.before(date)) {
+					date = photo.date;
+				}
+			}
+			dateStr = dateFormatter.format(date);
+		}
+		
+		return dateStr;
+	}
+	
+	
+	public String getLastDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
+		Date date = null; 
+		String dateStr = "No Date";
+		if (!photoList.isEmpty()) {
+			date = this.getAllPhotos().get(this.getAllPhotos().size()-1).date;
+			for (Photo photo: photoList) {
+				if (photo.date.after(date)) {
+					date = photo.date;
+				}
+			}
+			dateStr = dateFormatter.format(date);
+		}
+		
+		return dateStr;
+	}
 
     // save current state of the app to the dat file
     public static void saveAlbum(Album u) throws IOException {

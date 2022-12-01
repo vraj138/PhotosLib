@@ -14,17 +14,17 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="renameAlbumBtn" layoutX="230.0" layoutY="535.0" mnemonicParsing="false" onAction="#onRenameAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Rename Album" textFill="WHITE">
+      <Button fx:id="renameAlbumBtn" layoutX="230.0" layoutY="559.0" mnemonicParsing="false" onAction="#onRenameAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Rename Album" textFill="WHITE">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="createAlbumBtn" layoutX="15.0" layoutY="535.0" mnemonicParsing="false" onAction="#onCreateAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Create Album" textFill="WHITE">
+      <Button fx:id="createAlbumBtn" layoutX="15.0" layoutY="559.0" mnemonicParsing="false" onAction="#onCreateAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Create Album" textFill="WHITE">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="deleteAlbumBtn" layoutX="121.0" layoutY="535.0" mnemonicParsing="false" onAction="#onDeleteAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Delete Album" textFill="WHITE">
+      <Button fx:id="deleteAlbumBtn" layoutX="121.0" layoutY="559.0" mnemonicParsing="false" onAction="#onDeleteAlbum" prefHeight="33.0" prefWidth="93.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Delete Album" textFill="WHITE">
          <font>
             <Font size="11.0" />
          </font>
@@ -35,12 +35,17 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <Text fx:id="numOfPhotos" layoutX="20.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos:" wrappingWidth="218.99999678134918" />
-      <Text fx:id="dateRange" layoutX="20.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Range:" wrappingWidth="218.99999678134918" />
+      <Text fx:id="numOfPhotos" layoutX="20.0" layoutY="489.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos:" wrappingWidth="107.99999678134918" />
       <Button fx:id="searchPhotosBtn" layoutX="260.0" layoutY="26.0" mnemonicParsing="false" onAction="#onSearchPhotos" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #000000#000000; -fx-background-radius: 10;" text="Search" textFill="WHITE">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
+      <Label fx:id="tfNumPhotos" layoutX="128.0" layoutY="476.0" prefHeight="17.0" prefWidth="155.0" text="Label" />
+      <Text fx:id="tfDateRange" layoutX="20.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="278.21630859375">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
