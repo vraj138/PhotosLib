@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
 import model.GlobalUser;
@@ -440,6 +441,7 @@ public class PhotosDisplayController implements LogoutController{
                 spController.start(appStage);
                 appStage.setScene(adminSettingsScene);
 				appStage.setResizable(false);
+				appStage.initModality(Modality.APPLICATION_MODAL);
 				appStage.setX(100);
 				appStage.setY(100);
                 appStage.show();
