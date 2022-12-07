@@ -13,6 +13,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public interface LogoutController {
     default void logUserOut(ActionEvent event) throws IOException {
         Alert alert = new Alert(AlertType.CONFIRMATION);

@@ -10,11 +10,18 @@ import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import model.GlobalUser;
 
+/**
+ * @author Deep Parekh and Vraj Patel
+ */
 public class Photos extends Application {
 
     public static GlobalUser gu = new GlobalUser();
     public Stage appStage;
 
+    /**
+     * @param primaryStage main stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
@@ -44,6 +51,11 @@ public class Photos extends Application {
 
     }
 
+    /**
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         try {
             gu = GlobalUser.loadGlobalUser();
